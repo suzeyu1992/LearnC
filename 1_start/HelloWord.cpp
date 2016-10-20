@@ -12,5 +12,6 @@ int main(){
     int v1 = 0, v2 = 0;
     std::cin >> v1 >> v2;
     std::cout << "数字为: " << v1 << " + " << v2 << " = "<< v1+v2 << std::endl;
+    printf("%s\n", "嘿嘿");
     return 0;
 }
