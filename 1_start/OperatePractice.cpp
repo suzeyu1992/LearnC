@@ -1,7 +1,8 @@
 
 int uninitializedVariableOutside ;
+int reused = 20;    // reused变量具有全局作用域
 
-
+int &refVal = reused;       // refVal 指向reused, 可以理解为引用即别名
 int main(){
 
     // 无符号类型相减的时候注意 出现负数的情况
@@ -35,6 +36,15 @@ int main(){
 
     extern int declarationInt ;      // 声明一个变量而非定义 , 如果在函数体内部用extern声明的时候试图初始化那么会crash
     int definitionInt;              // 声明一个变量并定义
+
+    std::cout << "输出全局变量reused的值: " << reused << std::endl;
+    int reused = 10;    // 会覆盖全局reused的变量
+    std::cout << "输出局部变量创建后的reused的值: " << reused << std::endl;
+    // refVal = 1000;        // 使用引用(别名)修改原始值, 会对全局reused指向的值触发影响
+    std::cout << "显式的调用全局变量reused的值: " << ::reused << std::endl;
+
+
+
 
 
     return 0;
