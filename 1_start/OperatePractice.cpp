@@ -144,6 +144,18 @@ int main(){
 
 
 
+    std::cout << "\n************************* auto类型说明符 *************************************" << std::endl;
+    // 新标准中引入了 auto 类型说明符, 用它能让编译器去替我们去分析表达式所属的类型.
+    //auto item = val1 + val2;    // item初始化为val1和val2相加的结果
+
+    // 也可以使用auto在一条语句声明多个变量
+    auto iq = 0, *e = &iq;    // 合法, i是整数, p是整数指针
+
+    // 由于auto一般会忽略顶层const, 保留底层const, 所以当初始值是一个指向常量的指针时会有如下不同场景
+    const int cc = 20;
+    auto autoBc = cc;       // autoBc是一个整数, 其顶层const特性被忽略
+    const auto autoTc = cc; // autoBc是一个常量int, 对auto推出的结果是一个顶层const
+
 
 
 
