@@ -73,5 +73,37 @@ int main(){
     *pd = temp;
     std::cout << "void*指针的值: " << *pd << "  obj"<<obj<< std::endl;
 
+    std::cout << "\n************************* const限定符 *************************************" << std::endl;
+    const int finalSize = 100;      // 声明限定符常量, 相当于java中的final修饰符 ,
+
+    //const int i = getSize();      // 运行时初始化
+    //const int j = 44;             // 编译时初始化, 当以编译时初始化的方式定义const对象默认对象只在文件内有效
+    //const int k;                  // 错误样例
+
+    // 如果不希望编译器为每个文件分别生成独立的变量 , 而多个文件使用同一个const变量可以使用extern关键字
+    /*
+        // file_1.cc文件定义并初始化了一个常量, 该常量能被其他文件访问
+        extern const int bufSize = fcn();
+        // file_1.h 头文件
+        extern const int bufSize;       // 与file_1.cc文件中定义的bufSize是同一个
+    */
+
+    int b = 42;
+    const int &b1 = b;      // 允许将const int&绑定到一个普通int对象上
+    //int &b2 = b1 * 2;       // 这是一个错误, 因为b2是一个普通的非常量的引用
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
     return 0;
 }
