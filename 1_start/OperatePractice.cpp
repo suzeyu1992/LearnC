@@ -92,8 +92,24 @@ int main(){
     const int &b1 = b;      // 允许将const int&绑定到一个普通int对象上
     //int &b2 = b1 * 2;       // 这是一个错误, 因为b2是一个普通的非常量的引用
 
-    
 
+    std::cout << "\n************************* const 的指针练习 *************************************" << std::endl;
+    const double pi = 3.14;     // pi是常量, 值不可以改变
+    //double *ptr = &pi;        // 这是非法, 因为ptr是一个普通指针
+    const double *cptr = &pi;   // 正确, cptr可以指向一个双精度常量
+    // *cptr = 42;              // 非法, 不能给*cptr指针对指向的对象赋值
+
+    // 虽然指针的类型必须与其所指的对象的类型一直,  但是同引用一样有两个例外
+    double dval = 3.14;
+    cptr = &dval;       // 合法, 当时不能通过cptr改变dval值
+
+    // 由于指针是对象而引用不是, 因此就如其他对象一样, 允许把指针本身定为常量,
+    // 常量指针必须初始化, 而且一旦初始化完成,其内部值(存放指针的地址)就不能再改变
+    int errNumb = 0;
+    int *const curErr = &errNumb;   // curErr将一直指向errNumb对象
+
+    const double cbn = 3.14;
+    const double *const pip = &cbn;
 
 
 
