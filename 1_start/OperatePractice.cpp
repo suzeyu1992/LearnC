@@ -109,9 +109,9 @@ int main(){
     int *const curErr = &errNumb;   // curErr将一直指向errNumb对象
 
     const double cbn = 3.14;
-    const double *const pip = &cbn;
+    const double *const pip = &cbn;     // pip是一个指向常量对象的常量指针
 
-
+    
 
 
 
