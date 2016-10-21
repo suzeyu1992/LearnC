@@ -1,7 +1,6 @@
 
 int uninitializedVariableOutside ;
 int reused = 20;    // reused变量具有全局作用域
-
 int &refVal = reused;       // refVal 指向reused, 可以理解为引用即别名
 int main(){
 
@@ -111,7 +110,40 @@ int main(){
     const double cbn = 3.14;
     const double *const pip = &cbn;     // pip是一个指向常量对象的常量指针
 
-    
+
+
+    std::cout << "\n************************* const 的指针练习 *************************************" << std::endl;
+
+    // 常量表达式: 是指值不会改变并且在编译过程就能得到计算结果的表达式
+    // 在c++11新标准中, 允许将变量声明为 constexpr 类型以便由编译器来验证变量值是否是一个常量表达式.
+    // 声明为 constexpr 的变量一定是一个常量, 而且必须用常量表达式初始化
+
+    //constexpr int mf = 20;      // 20字面值, 也就是固定式所以是常量表达式
+    //constexpr int limit = mf +1;    // 同样是一个固定值也就是常量表达式
+    // constexpr int sz = size();   // 只有当size()是一个constexpr函数时才是一条正确声明语句.
+
+    // 当使用constexpr 声明一个指针时, 限定符constexpr仅对指针有效, 与指针所指对象无关
+    const int *pp = nullptr;        // pp是一个指向整型常量的指针
+    //constexpr int *qq = nullptr;    // qq是一个指向整数的常量指针
+    // 注意上面个两个的类型是不同的, 一个是指向常量的 指针,   一个是指向整数的 常量指针.
+
+    // 于其他常量指针类似, constexpr指针既可以指向常量也可以指向一个非常量.
+
+    std::cout << "\n************************* 类型别名 *************************************" << std::endl;
+
+    // 传统方法: 使用关键字typedef , 当有typedef的声明语句定义的不再是变量而是变量别名
+    typedef int aInt, *ai;      // aInt是int的同义词, ai是int*的同义词
+    aInt testInt = 10;
+    ai pInt= &testInt;
+    std::cout << "使用传统方式typedef(类型别名)测试:  " << *pInt <<std::endl;
+
+    // 新标准规定中有了另一种方式 使用别名声明来定义类型的别名
+    using bInt = int;
+    bInt testBInt = 11;
+    std::cout << "使用新标准方式using(别名声明)测试:  " << testBInt <<std::endl;
+
+
+
 
 
 
