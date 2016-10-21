@@ -1,4 +1,6 @@
 
+#include "SalesData.h"
+
 int uninitializedVariableOutside ;
 int reused = 20;    // reused变量具有全局作用域
 int &refVal = reused;       // refVal 指向reused, 可以理解为引用即别名
@@ -157,7 +159,19 @@ int main(){
     const auto autoTc = cc; // autoBc是一个常量int, 对auto推出的结果是一个顶层const
 
 
+    std::cout << "\n************************* 使用自定义结构 *************************************" << std::endl;
+    SalesData data1, data2;
+    // 设置第一本书
+    data1.bookName = "Java进阶之路";
+    data1.revenue = 10;
 
+    // 设置第二本书
+    data2.bookName = "c++初始之路";
+    data2.revenue = 20;
+
+    std::cout << "两本书总价: " << data1.revenue + data2.revenue << std::endl;
+
+    
 
 
 
