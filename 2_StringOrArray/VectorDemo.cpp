@@ -1,4 +1,5 @@
 # include <vector>
+# include <iostream>
 using std::vector;
 
 int main(int argc, char const *argv[]) {
@@ -25,9 +26,24 @@ int main(int argc, char const *argv[]) {
             vector<string> v8{10,"hi"}  // 容器包含了10个值为"hi"的元素
     */
 
+    // vector的添加操作 push_back
+    vector<int> v2;         // 声明一个空的vector对象
+    for (size_t i = 0; i < 99; i++) {
+        v2.push_back(i);        // 依次把整数添加到v2的尾端
+    }
+    std::cout << "利用push_back压入添加的方法后,容器的大小: " << v2.size() << std::endl;
 
+    // 使循环内的元素变为元素的平方
+    for (auto &i : v2){
+        i *= i;
+    }
+    // 循环遍历输出
+    for(auto &i : v2){
+        std::cout << i << "  ";
+    }
+    std::cout << std::endl;
 
-
+    // 当使用vector下标的时候注意, 包括string对象, 下标的运算符可用于访问已存在的元素, 而不能用于添加元素. 
 
     return 0;
 }
