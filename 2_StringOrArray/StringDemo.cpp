@@ -1,10 +1,10 @@
+#include <string>
+#include <iostream>
+using std::string;
 // 通过下列using声明, 可以在函数体内直接使用标准库的名字
 using std::cout;
 using std::cin;
 using std::endl;
-
-#include <string>
-using std::string
 
 int main(){
     cout << "使用using声明, 省略标准的 命名空间::变量 的方式" << endl;
@@ -20,7 +20,29 @@ int main(){
     string s5 = "copy_initialization";       // 拷贝初始化
     string s6("direct_initialization");      // 直接初始化
 
+    // 使用getline()读取一行
+    /*
+    string lineStr ;
+    while(getline(cin, lineStr)){
+        cout << "我是复制输出" << lineStr << endl;
+    }
+    */
 
+    // 测试字符串的长度和判空
+    // 注意如果一条表达式中使用了 size() 那么就不要再使用int了, 这样可以避免int和unsigned混用的问题
+    string emptyStr = "";
+    cout << "emptyStr字符串是否为空: " << emptyStr.empty()
+         << "\nHello字符串的长度: "<< s3.size() << endl;
+
+
+    // 字符串对象相加
+    string addStr = s3 + s4;
+    cout << "字符串对象相加:" << addStr << endl;
+    s3 = "hhello";
+    cout << "改变之前相加字符串的某一个值并打印, s3=" << s3 << "     相加数addStr=" << addStr <<endl;
+
+    // 使用+连接字符串字面值常量和字符串对象的时候要注意,  不允许两个字面值常量字符串进行 + 连接
+    // 还有切记字符串字面值与string是不同类型
 
 
 }
