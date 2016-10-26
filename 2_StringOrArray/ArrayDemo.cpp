@@ -60,13 +60,42 @@ int main(int argc, char const *argv[]) {
 
         // 计算得到的尾后指针容易出错, 所以c++11中引入了 begin 和end函数, 虽然和vector功能类似, 但是数组毕竟不是类类型,
         // 因此这两个函数不是成员函数, 正确的使用形式是将数组作为他们的参数.
-        int *pbeg = std::begin(arr), *pend = std::end(arr);
+        int *pbeg = std::begin(arr), *pend = std::end(arr);     // pbeg指向arr的首元素, pend指向arr为元素的下一个位置
         while(pbeg != pend){
             cout << "   " << *pbeg ;
             pbeg++;
         }
         cout << endl;
 
+        cout << "************************指针的运算**************************************" << endl;
+        const std::size_t lenght = 5;
+        int arr9[lenght] = {1,2,3,4,5};
+        int *intp = arr9;                      // 等价于int *p = &arr[0]
+        int *intp2 = intp + 4;                // intp2指向arr[4]
+        // 给一个指针加上一个整数值, 其结果还是一个指针, 新指针指向的元素与原来的指针相比前进或者后退了该整数值个位置.
+
+        // 和迭代器一样, 两个指针相减的结果是他们之间的距离. 参与运算的两个指针必须指向同一个数组当中的元素.
+        // 当两个指针相减的结果的类型是一种 ptrdiff_t 的标准库类型, 和size_t一样, 都是定义在 cstddef头文件中的机器相关的类型. 因为差值可能为负值, 所欲是带符号类型
+        cout << "数组arr9的大小为: " << std::end(arr9)- std::begin(arr9) << endl;
+
+        // 关于解引用和指针运算需要注意先后顺序
+        // 例如arr9数组 {1,2,3,4,5}
+        int tempArr[] = {0,2,4,6,8};
+        int last_1 = *(tempArr + 4);        // 结果:8 首先右侧tempArr是一个指针类型指向数组第一个元素, +4代表指针向下移动4个位置, 指向了数组的下标为4的元素, 然后执行解引用
+        int last_2 = *tempArr + 4;          // 结果:4 首先对指针类型进行解引用, 取得数组的第一个元素对象其值为0, 然后进行普通加法运算 0+4
+        cout << "last_1=" << last_1 << "    last_2=" << last_2 << endl;
+
+        // 了解数组下标的真实实现
+        // 使用数组下标的形式, 其实本质上用的就是指向数组首元素的指针, 编译器会进行这些步骤的自动转换操作
+        int tempInt = tempArr[2];           // 1.tempArr转换成了指向数组第一个元素的指针
+                                            // 2.tempArr[2]得到(tempArr+2)所指的元素
+        int *tempP = &tempArr[2];           // tempP指向索引为2的元素
+        int j = tempP[1];                   // tempP[1] ==> *(temp+1), 就是对应的tempArr[3]
+        int k = tempP[-1];                  // 根据上面的转换, 对应tempArr[1]
+        cout << "下标的元素的传递计算  j=" << j << "  k=" << k << endl;
+        // 这里要注意虽然string和vector也可以下标运算, 但是数组和他们稍有区别, 标准库类型限定使用的下标必须是无符号类型,
+        // 而内置的下标运算无此要求, 所以直观来说: 数组的下标可以为负值, 是有符号类型; 而string和vector必须是正数,无符号类型
+        
 
 
     return 0;
