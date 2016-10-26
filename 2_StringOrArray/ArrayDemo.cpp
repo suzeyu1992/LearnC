@@ -1,5 +1,8 @@
 #include <string>
 #include <iostream>
+#include <cstring>      // cstring是c语言头文件string.h的c++版本
+#include <vector>
+
 using std::string;
 // 通过下列using声明, 可以在函数体内直接使用标准库的名字
 using std::cout;
@@ -95,7 +98,39 @@ int main(int argc, char const *argv[]) {
         cout << "下标的元素的传递计算  j=" << j << "  k=" << k << endl;
         // 这里要注意虽然string和vector也可以下标运算, 但是数组和他们稍有区别, 标准库类型限定使用的下标必须是无符号类型,
         // 而内置的下标运算无此要求, 所以直观来说: 数组的下标可以为负值, 是有符号类型; 而string和vector必须是正数,无符号类型
-        
+
+        cout << "************************c风格的字符串**************************************" << endl;
+        // c风格的字符串不是一种类型, 而是为了表达和使用字符串而形成的一种约定俗成的写法.
+        // 按照此书写的字符串存放在字符数组中并以空字符结束, '\0'
+        char ca[] = {'c', '+', '+', '\0'};
+        cout << "利用c风格字符串来获取字符串长度:" <<std::strlen(ca) << endl;
+
+        // c风格字符串比较大小
+        const char ca1[] = "abc";
+        const char ca2[] = "abd";
+        // 不可以使用if(ca1>ca2)来判断, 因为当使用数组的时候其实默认是指向数组的首元素指针, 并且彼此是毫无关系的两个地址, 所以无法进行比较.
+        if(std::strcmp(ca1,ca2) > 0){   // 如果前面的字符串比较大, 那么就返回正值
+            cout << "ca1字符串较大" << endl;
+        }else{
+            cout<< "ca2字符串较大" << endl;
+        }
+
+        // c风格中对字符串的链接和拷贝
+        char largeStr[10];
+        std::strcpy(largeStr, ca1);         //字符串进行拷贝
+        std::strcat(largeStr, ca2);         //字符串进行连接
+        cout << "使用c风格字符串连接方法结果: " << largeStr << endl;
+
+        // 任何出现字符串字面值的地方都可以使用以空字符结束的字符数组来替代
+        // 这是c++为了兼容之前的c风格的字符串
+        string composeStr (ca1);
+
+        // 使用数组初始化vector对象,
+        // 虽然不允许使用一个数组为另一个内置类型的数组赋初始值, 也不允许使用vector对象初始化数组. 当相反却可以.
+        // 可以使用数组来初始化vector对象, 要完成这样的目的, 只需要指明要拷贝区域的首元素地址和尾后地址即可.
+        std::vector<int> iVector(std::begin(tempArr), std::end(tempArr));
+        // 如果需要拷贝数组下标1,2,3的元素, 可以直接利用数组名本质为指针的特性来进行赋值初始化
+        std::vector<int> iSubVector(tempArr+1, tempArr+4);
 
 
     return 0;
