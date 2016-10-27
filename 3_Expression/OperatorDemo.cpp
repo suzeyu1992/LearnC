@@ -46,5 +46,31 @@ int main(int argc, char const *argv[]) {
     std::cout << "char的占用空间字节数: "<< sizeof(c) << std::endl;
     std::cout << "char类型指针的占用空间字节数: "<< sizeof(pc) << std::endl;
 
+    // 显示转换
+    int vi_1 = 3, vi_2=2;
+    double slope = vi_1/vi_2;               // 结果为1,
+    std::cout << "强制类型转换结果: " << slope << std::endl;
+
+    // 使用命名的强制类型转换
+    // static_cast 任何具有明确定义的类型转换, 只要不包含底层const, 都可以使用static_cast
+    slope = static_cast<double>(vi_1)/vi_2;
+    std::cout << "static_cast强制类型转换结果: " << slope << std::endl;
+
+    // 利用void*可以存放任何非常量对象的地址特性, 和static_cast强制转换可以互相使用.
+    void* pp = &slope;
+    double *dp = static_cast<double*>(pp);
+    std::cout << "强制换换对象并输出: " << *dp << std::endl;
+
+
+    // const_cast 只能改变运算对象的底层const
+    // 对于将将常量对象转换成非常量对象的行为, 我们一般称其为去掉const性质.
+
+    // 旧式的强制类型转换
+    /*
+        type (expr);            // 函数形式的强制类型转换
+        (type) expr;            // c语言风格的强制类型转换
+    */
+
+
     return 0;
 }
