@@ -61,6 +61,30 @@ int main(int argc, char const *argv[]) {
         首先(*)返回的是一个指针, int (*)[10] 然后其余部分标出指针指向对象的类型为一个大小为10的整数型数组
     */
 
+    /*
+        重载函数
+        如果同一个作用域内的几个函数名字相同但形参列表不同, 称为 overloaded function, 返回值不参与评判重载的标准
+
+
+        // 利用引用形参构建两个重载函数
+        Record lookup(const Account&);
+        Record lookup(const Phone&);            // 属于重载函数
+
+        // 重载和const形参
+        // 顶层的const不影响传入函数的对象, 一个拥有顶层const的形参无法和另外一个没有顶层const的形参区分开来
+        Record lookup(Phone);
+        Record lookup(const Phone);  // 第二条错误, 重复声明了函数
+
+        Record lookup(Phone*);
+        Record lookup(Phone* const);  // 第二条错误, phone* 代表着 phone是一个指针, 然后const修饰这个指针是一个常量指针, 也就是顶层const
+
+        但是如果传入形参是指针, 指针的顶层const不同那么就可以作为重载
+        Record lookup(Phone*);         // 指针指向的是一个非常量对象
+        Record lookup(const Phone*);   // 属于重载, const 修饰的效果指针指向的对象是常量, 这是一个底层const. 表明对象是一个常量对象
+
+
+
+    */
 
 
     // 主函数的返回值, 如果控制到达结尾处没有return语句, 编译器将隐式地插入一条返回0的return语句
