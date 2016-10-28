@@ -3,11 +3,14 @@
 #include <string>
 #include <initializer_list>
 #include <vector>
+#include <sstream>
+#include <cassert>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
+using namespace std;
 
 size_t callCountAdd(){
     static size_t ctr = 0;
@@ -21,6 +24,15 @@ size_t callCountAdd(){
 //     return {"列表", "初始化", "返回值"};
 // }
 
+
+// 默认实参
+typedef string::size_type sz;
+string screen(sz h = 24, sz w = 24){
+    // 使用标准库
+    stringstream  ss;
+    ss << "高:" << h << "    宽:" << w;
+    return ss.str() ;
+}
 
 int main(int argc, char const *argv[]) {
     std::vector<char> v('1');
@@ -85,6 +97,29 @@ int main(int argc, char const *argv[]) {
 
 
     */
+
+    // 调用默认实参
+    string result_1 = screen();
+    cout << "调用默认实参函数(不传参数)结果: " << result_1 << endl;
+    result_1 = screen(1);
+    cout << "调用默认实参函数(传第一个参数)结果: " << result_1 << endl;
+    result_1 = screen(1,1);
+    cout << "调用默认实参函数(传第两参数)结果: " << result_1 << endl;
+    // 注意对于没有实参的函数和有实参的函数是可以共存的, 例如函数
+    // void add(int a){}
+    // Void add(int a = 1){}
+
+
+
+    // 调试帮助 -- assert预处理宏
+    /*
+        assert是一种预处理宏, 所谓预处理宏其实是一个预处理变量, 它的行为有点类似于内联函数. assert宏是用一个表达式作为他的条件.
+        assert宏定义在cassert头文件中, 预处理名字由预处理器而非编译器管理, 因此, 可以直接使用预处理名字而无需提供using声明.
+        表示式的结果如果是0那么断言失败, 系统终止执行, 反之非0, 程序继续向下执行.
+    */
+    assert(1);
+    cout << "断言成功可以继续执行" << endl;
+
 
 
     // 主函数的返回值, 如果控制到达结尾处没有return语句, 编译器将隐式地插入一条返回0的return语句
