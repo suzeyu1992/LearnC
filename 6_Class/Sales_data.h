@@ -1,6 +1,7 @@
 #ifndef SALES_DATA_H   //判断SALES_DATA_H变量是否未定义, 如果是未定义那么会顺序向下执行, 直到#endif
 #define SALES_DATA_H   // 定义SALES_DATA_H变量
 #include <string>
+#include <iostream>
 
 struct Sales_data{
 
@@ -30,5 +31,60 @@ double Sales_data::avg_prince() const{
     else
         return 0;
 }
+
+// 继续定义combine的函数, 返回一个this对象的函数
+Sales_data& Sales_data::combine(const Sales_data &rhs){
+    sold += rhs.sold;        // 把rhs的成员加到this对象的成员上
+    revenue += rhs.revenue;
+    return *this;            // 通过解引用this指针以获得执行该函数的对象
+}
+
+// 定义类接口函数
+std::istream &read(std::istream &is, Sales_data &item ){
+    double price = 0;
+    is >> item.bookNo >> item.sold >> price;
+    item.revenue = price * item.sold;
+    return is;
+}
+
+std::ostream &print(std::ostream &os, const Sales_data &item){
+    os << item.isbn() << " " << item.sold << " "
+       << item.revenue << " " << item.avg_prince();
+}
+
+// add把两个sales_data对象相加, 返回一个新的sales_data
+Sales_data add(const Sales_data &lhs, const Sales_data &rhs){
+    Sales_data sum = lhs;       // 把一个对象的数据成员拷贝给新对象sum
+    sum.combine(rhs);
+    reutrn sum;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif
