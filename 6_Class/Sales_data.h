@@ -3,8 +3,15 @@
 #include <string>
 #include <iostream>
 
-struct Sales_data{
+// 也可以使用class定义, 对于使用class或者struct定义类唯一的区别就是默认访问权限不同
+class Sales_data{
 
+    // 为sales_data的非成员函数所做的友元声明
+    friend Sales_data add(const Sales_data&, const Sales_data&);
+    friend std::ostream &print(std::ostream&, const Sales_data&);
+    friend std::istream &read(std::istream&, Sales_data&);
+    
+public:
         // 准备定义四个构造函数
         Sales_data = default;
         /*
@@ -21,6 +28,7 @@ struct Sales_data{
         // 而此函数另一个关键之处是紧随参数列表之后的const关键字, 这里const的作用是修改隐式this指针的类型
 
         Sales_data& combine(const Sales_data&);                 // 此函数类内部只有声明
+private:
         double avg_prince() const;                              // 此函数类内部只有声明
 
         std::string bookName;
