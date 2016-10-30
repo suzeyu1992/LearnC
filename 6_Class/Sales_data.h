@@ -5,6 +5,16 @@
 
 struct Sales_data{
 
+        // 准备定义四个构造函数
+        Sales_data = default;
+        /*
+            从:开始到花括弧, 称为构造函数初始化值列表, 负责为新创建的对象的一个或几个数据成员赋初值, 每个成员名字后紧跟一堆小括号, 小括号内
+            成员的初始值, 不同成员的初始化通过逗号分割开来.
+        */
+        Sales_data (const std::string &s):bookNo(s){}
+        Sales_data (const std::string &s, unsigned n, double p):bookNo(s), sold(n), revenue(p*n){}
+        Sales_data (std::istream &);
+
         // 关于Sales_data的新成员
         std::string isbn() const {return bookName};             // 此函数声明和定义都在类的内部
         // 上面一句的函数体等价于 {return this->bookName;} // 因为this的目的总是指向这个对象, 所以this是一个常量指针, 不允许改变this中保存的地址
@@ -17,6 +27,11 @@ struct Sales_data{
         unsigned sold = 0;
         double revenue = 0.0;
 };
+// 在类的外部定义构造函数
+Sales_data::Sales_data (std::istream &is){
+    read(is, *this);        // read函数的作用是从gis中读取一条交易信息然后存入this对象中
+}
+
 
 // 作为接口组成部分的非成员函数, 定义和声明都在类的外部
 Sales_data add(const Sales_data&, const Sales_data&);
@@ -56,7 +71,7 @@ std::ostream &print(std::ostream &os, const Sales_data &item){
 Sales_data add(const Sales_data &lhs, const Sales_data &rhs){
     Sales_data sum = lhs;       // 把一个对象的数据成员拷贝给新对象sum
     sum.combine(rhs);
-    reutrn sum;
+    reutrn sum;                 // 返回对象的副本
 }
 
 
