@@ -6,11 +6,11 @@
 // 也可以使用class定义, 对于使用class或者struct定义类唯一的区别就是默认访问权限不同
 class Sales_data{
 
-    // 为sales_data的非成员函数所做的友元声明
+    // 为sales_data的非成员函数所做的友元 声明
     friend Sales_data add(const Sales_data&, const Sales_data&);
     friend std::ostream &print(std::ostream&, const Sales_data&);
     friend std::istream &read(std::istream&, Sales_data&);
-    
+
 public:
         // 准备定义四个构造函数
         Sales_data = default;
