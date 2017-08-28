@@ -53,11 +53,10 @@ int main(int argc, char const *argv[]) {
 
     std::string ifile= "/Users/suzeyu/Documents/workspace/c/LearnC/7_IoClass/Test.txt";
     std::ifstream in(ifile);
-    in.open() >> ifile ;
-    std::cout << ifile << std::endl;
-    // std::ofstream out;
-    // out.open(ifile);
-    // out << "嘿嘿" << std::endl;
+
+    std::ofstream out;
+    out.open(ifile);
+    out << "嘿嘿" << std::endl;
 
 
     /*
